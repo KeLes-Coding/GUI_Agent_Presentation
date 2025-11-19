@@ -1,0 +1,18 @@
+
+<div class="slide-container" id="slide7">
+    <h2>Jarvis 设计：语义动作与闭环</h2>
+    <div class="tiled-content">
+        <div class="tile">
+            <div class="icon"><i class="fa-solid fa-keyboard"></i></div>
+            <h3>语义动作模块</h3>
+            <p>摒弃不稳定坐标，采用 <code>tap(uid)</code>, <code>input(uid)</code>。</p>
+            <p>引入物理原语 <code>swipe(dir, mag)</code> 模拟人类直觉操作。</p>
+        </div>
+        <div class="tile">
+            <div class="icon"><i class="fa-solid fa-rotate"></i></div>
+            <h3>O-T-A 执行闭环</h3>
+            <p><strong>Observe:</strong> 获取截图与简化XML。</p>
+            <p><strong>Think:</strong> 输出 JSON <code>{"thought": "...", "action": "..."}</code>。</p>
+            <p><strong>Act:</strong> ADB执行 + 自动重试机制。</p>
+        </div>
+    </div>

@@ -1,0 +1,32 @@
+
+<div class="slide-container" id="slide9">
+    <h2>混合优势函数：$A_{\text{final}}$</h2>
+    <div class="two-column">
+        <div>
+            <div style="background: #f1f5f9; padding: 30px; border-radius: 16px; border: 1px solid #cbd5e1; margin-bottom: 30px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+                <math display="block">
+                  <msub><mi>A</mi><mtext>final</mtext></msub>
+                  <mrow><mo>(</mo><msub><mi>a</mi><mi>t</mi></msub><mo>)</mo></mrow>
+                  <mo>=</mo>
+                  <msub><mi>A</mi><mtext>traj</mtext></msub>
+                  <mrow><mo>(</mo><mi>τ</mi><mo>)</mo></mrow>
+                  <mo>+</mo>
+                  <mi>ω</mi>
+                  <mo>·</mo>
+                  <msub><mi>A</mi><mtext>step</mtext></msub>
+                  <mrow><mo>(</mo><msub><mi>a</mi><mi>t</mi></msub><mo>)</mo></mrow>
+                </math>
+            </div>
+            <p>结合宏观轨迹结果与微观步骤贡献，平衡长期目标与短期反馈。</p>
+        </div>
+        <div>
+            <div class="tile" style="margin-bottom: 20px;">
+                <h4 style="color: #0ea5e9; margin-bottom: 10px;">宏观优势 ($A_{\text{traj}}$)</h4>
+                <p style="font-size: 18px;"><strong>防作弊 (Anti-Shortcut):</strong> 若步数过少判定为侥幸，强制归零。</p>
+                <p style="font-size: 18px;"><strong>有效奖励:</strong> 仅奖励真实有效的成功轨迹。</p>
+            </div>
+            <div class="tile">
+                <h4 style="color: #0ea5e9; margin-bottom: 10px;">微观优势 ($A_{\text{step}}$)</h4>
+                <p style="font-size: 18px;">引入因果感知，量化单步动作对最终成功的边际贡献。</p>
+            </div>
+        </div>
