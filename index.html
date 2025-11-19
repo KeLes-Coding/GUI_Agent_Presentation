@@ -13,12 +13,10 @@
     <script>
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']], // 告诉它：单$符号也是公式
-        displayMath: [['$$', '$$'], ['\\[', '\\]']] // 双$$是独立公式
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
       },
-      svg: {
-        fontCache: 'global'
-      }
+      svg: { fontCache: 'global' }
     };
     </script>
     <script type="text/javascript" id="MathJax-script" async
@@ -26,11 +24,19 @@
     </script>
 </head>
 <body>
+
     <div id="presentation-deck"></div>
 
-    <div id="page-indicator">
-        <span id="current-page">1</span> / <span id="total-pages">0</span>
+    <div id="control-bar">
+        <div class="page-info">
+            <span id="current-page">1</span> / <span id="total-pages">--</span>
+        </div>
+        <div class="separator">|</div>
+        <button id="fullscreen-btn" title="演示模式 (F11)">
+            <i class="fa-solid fa-expand"></i>
+        </button>
     </div>
+
     <script src="js/loader.js"></script>
     <script src="js/script.js"></script>
 </body>

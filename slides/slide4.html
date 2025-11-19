@@ -2,12 +2,19 @@
 <div class="slide-container" id="slide4">
     <h2>基准构建：NaturalGAIA</h2>
     <div class="two-column">
-        <div>
-            <div class="image-wrapper contain" style="background: #f8fafc; border: 1px solid #e2e8f0;">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/5556645217368104198" alt="Abstract causal dependency flowchart">
+
+        <div class="w-[55%] relative group perspective-1000">   
+                <!-- 1. 视觉锚点 (Visual Anchor)：背后的光晕，解决突兀感 -->
+                <div class="absolute -inset-6 bg-gradient-to-tr from-blue-100 via-sky-50 to-transparent rounded-[40px] opacity-60 blur-2xl transform transition-all duration-700 group-hover:scale-105 group-hover:opacity-80 -z-10"></div>
+                <!-- 2. 图片容器：卡片式设计 -->
+                <div class="relative bg-white rounded-2xl p-3 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] ring-1 ring-slate-900/5 transition-transform duration-500 hover:-translate-y-1"> 
+                    <!-- 内层边框容器 -->
+                    <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 relative aspect-[4/3] flex items-center justify-center">
+                        <img src="assets/NaturalGAIA_CP.svg" class="w-full h-full object-contain p-4" alt="Causal Pathway">
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 14px; color: #94a3b8; margin-top: 10px;">Figure 1: Causal Pathway 示意图</p>
             </div>
-            <p style="text-align: center; font-size: 14px; color: #94a3b8; margin-top: 10px;">Figure 1: Causal Pathway 示意图</p>
-        </div>
         <div>
             <h3 style="color: #0f172a;">核心理念：因果路径</h3>
             <ul style="list-style: none; padding: 0;">
