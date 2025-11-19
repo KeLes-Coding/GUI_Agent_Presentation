@@ -3,22 +3,32 @@
     box-sizing: border-box;
 }
 
-/* 修正点 1: Body 只负责背景和基本字体，不再负责布局 */
 body {
     background-color: #f1f5f9;
     margin: 0;
-    padding: 0; /* 移除 padding，交给 deck */
+    padding: 0;
     min-height: 100vh;
     font-family: 'Noto Sans SC', 'Urbanist', sans-serif;
     color: #334155;
-    /* 隐藏滚动条，配合 JS 翻页 */
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
-    overflow-y: hidden; 
+    
+    /* --- 修改开始 --- */
+    /* 允许垂直滚动 */
+    overflow-y: auto; 
+    /* 如果想要平滑滚动效果，保持这个 */
+    scroll-behavior: smooth; 
+    /* --- 修改结束 --- */
 }
 
-body::-webkit-scrollbar { 
-    display: none; 
+/* 既然像网页一样滑动，可以把滚动条做得好看一点，而不是完全隐藏 */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px;
 }
 
 /* 修正点 2: 新增容器样式，继承原本 Body 的布局能力 */
@@ -286,3 +296,49 @@ tr:last-child td { border-bottom: none; }
 
 /* HTML 平滑滚动 */
 html { scroll-behavior: smooth; }
+
+/* 在 css/style.css 文件末尾添加以下样式 */
+
+#page-indicator {
+    position: fixed; /* 固定定位 */
+    bottom: 25px;    /* 离底部 25px */
+    right: 35px;     /* 离右边 35px */
+    background-color: rgba(255, 255, 255, 0.6); /* 浅色半透明背景 */
+    backdrop-filter: blur(5px); /* 毛玻璃效果 */
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace; /* 使用等宽字体，更显科技感 */
+    font-size: 18px;
+    color: #64748b; /* 浅灰色文本 */
+    z-index: 1000; /* 确保页码在最上层 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* 轻微阴影 */
+    border: 1px solid rgba(226, 232, 240, 0.5); /* 浅色边框 */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#page-indicator #current-page {
+    font-weight: 700;
+    color: #0ea5e9; /* 当前页码可以稍微突出 */
+}
+
+#page-indicator #total-pages {
+    font-weight: 500;
+}
+
+/* --- 在 css/style.css 末尾添加 --- */
+
+/* 卡片内部的页码 */
+.slide-page-number {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 16px;
+    color: #94a3b8; /* 浅灰色，不抢眼 */
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    z-index: 10; /* 确保浮在背景光晕之上 */
+    opacity: 0.8;
+    pointer-events: none; /* 鼠标穿透，不影响操作 */
+}

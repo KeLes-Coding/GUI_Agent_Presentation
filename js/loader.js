@@ -1,37 +1,52 @@
 async function loadSlides() {
     const container = document.getElementById('presentation-deck');
-    // 定义你要加载的文件数量
-    const totalSlides = 15; 
+    let slideIndex = 1;
+    let keepLoading = true;
 
-    for (let i = 1; i <= totalSlides; i++) {
+    console.log("开始自动加载幻灯片...");
+
+    while (keepLoading) {
         try {
-            // 动态获取文件
-            const response = await fetch(`slides/slide${i}.html`);
+            // 1. 请求文件
+            const response = await fetch(`slides/slide${slideIndex}.html`);
             
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                console.log(`检测到 slide${slideIndex}.html 不存在，加载结束。共加载 ${slideIndex - 1} 页。`);
+                keepLoading = false;
+                break;
             }
             
             const html = await response.text();
             
-            // 将读取到的 HTML 字符串追加到容器中
-            // 使用 insertAdjacentHTML 比 innerHTML += 更快，且不会破坏已有的事件绑定
+            // 2. 插入 Slide HTML
             container.insertAdjacentHTML('beforeend', html);
+
+            // 3. 【关键修改】获取刚才插入的那个 slide 元素
+            const currentSlideElement = container.lastElementChild;
+
+            // 4. 【关键修改】在卡片内部插入页码数字
+            // 我们创建一个 div，不仅包含数字，还可以包含 "Page x" 这样的前缀，这里只放数字
+            const pageNumDiv = `<div class="slide-page-number">${slideIndex}</div>`;
+            currentSlideElement.insertAdjacentHTML('beforeend', pageNumDiv);
+            
+            // 准备下一页
+            slideIndex++;
             
         } catch (e) {
-            console.error(`无法加载 slide${i}.html:`, e);
-            container.insertAdjacentHTML('beforeend', `<div class="slide-container"><h1>加载失败: Slide ${i}</h1><p>${e.message}</p></div>`);
+            console.error("加载过程中发生异常:", e);
+            keepLoading = false;
         }
     }
 
-    // Slide 全部加载完毕后，我们需要通知 script.js 初始化翻页逻辑
-    // 因为 script.js 之前运行的时候，页面里可能还是空的
-    console.log("所有 Slides 加载完毕，初始化翻页控制...");
-    
-    // 触发一个自定义事件，通知 script.js
+    // 【新增】通知 MathJax 重新寻找并渲染页面上的公式
+    if (window.MathJax) {
+        window.MathJax.typesetPromise();
+    }
+
+    // 通知 script.js 初始化交互逻辑
     const event = new Event('slidesLoaded');
     document.dispatchEvent(event);
 }
 
-// 页面加载时立即执行
+// 执行加载
 loadSlides();

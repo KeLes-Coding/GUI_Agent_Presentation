@@ -1,36 +1,18 @@
 
-<div class="slide-container" id="slide8">
-    <h2>核心算法：CCAPO</h2>
-    <p class="subtitle" style="margin-bottom: 40px;">Counterfactual & Causal Advantage Policy Optimization</p>
-    
-    <div class="content-area" style="flex-direction: column;">
-        <div style="background: #f1f5f9; padding: 30px 50px; border-radius: 16px; border: 1px solid #cbd5e1; margin-bottom: 50px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
-            <math display="block">
-              <msub><mi>L</mi><mtext>CCAPO</mtext></msub>
-              <mo>=</mo>
-              <mrow>
-                <mo>(</mo><mn>1</mn><mo>-</mo><mi>λ</mi><mo>)</mo>
-              </mrow>
-              <mo>·</mo>
-              <msub><mi>L</mi><mtext>online</mtext></msub>
-              <mo>+</mo>
-              <mi>λ</mi>
-              <mo>·</mo>
-              <msub><mi>L</mi><mtext>buffer</mtext></msub>
-            </math>
+<div class="slide-container" id="slide7">
+    <h2>Jarvis 设计：语义动作与闭环</h2>
+    <div class="tiled-content">
+        <div class="tile">
+            <div class="icon"><i class="fa-solid fa-keyboard"></i></div>
+            <h3>语义动作模块</h3>
+            <p>摒弃不稳定坐标，采用 <code>tap(uid)</code>, <code>input(uid)</code>。</p>
+            <p>引入物理原语 <code>swipe(dir, mag)</code> 模拟人类直觉操作。</p>
         </div>
-
-        <div class="tiled-content">
-            <div class="tile" style="align-items: center; text-align: center;">
-                <h3 style="margin-bottom: 10px;">混合优势函数</h3>
-                <p style="font-size: 16px;">宏观防作弊 + 微观因果感知</p>
-            </div>
-            <div class="tile" style="align-items: center; text-align: center;">
-                <h3 style="margin-bottom: 10px;">STDB 轨迹库</h3>
-                <p style="font-size: 16px;">Top-K 经验存储与动态更新</p>
-            </div>
-            <div class="tile" style="align-items: center; text-align: center;">
-                <h3 style="margin-bottom: 10px;">混合计算组</h3>
-                <p style="font-size: 16px;">解决长序列任务的零梯度问题</p>
-            </div>
+        <div class="tile">
+            <div class="icon"><i class="fa-solid fa-rotate"></i></div>
+            <h3>O-T-A 执行闭环</h3>
+            <p><strong>Observe:</strong> 获取截图与简化XML。</p>
+            <p><strong>Think:</strong> 输出 JSON <code>{"thought": "...", "action": "..."}</code>。</p>
+            <p><strong>Act:</strong> ADB执行 + 自动重试机制。</p>
         </div>
+    </div>
