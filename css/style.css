@@ -39,25 +39,25 @@ body::-webkit-scrollbar { display: none; }
 
 /* 单张幻灯片卡片 (默认状态) */
 .slide-container {
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); /* 深邃阴影 */
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); /* 极淡的微光渐变 */
+    border-radius: 24px; /* 更圆润的圆角 */
+    /* 高级感核心：双层阴影 - 一层深色定轮廓，一层蓝色做氛围 */
+    box-shadow: 
+        0 20px 50px -12px rgba(14, 165, 233, 0.15), 
+        0 0 1px rgba(0,0,0,0.05),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8); /* 内发光描边 */
     display: flex;
     flex-direction: column;
-    /* 固定尺寸 */
-    width: var(--card-width);
-    height: var(--card-height);
+    height: 720px;
     justify-content: center;
     overflow: hidden;
     padding: 50px 60px;
     position: relative;
+    width: 1280px;
     color: #1e293b;
-    border: 1px solid #fff;
     flex-shrink: 0;
-    /* 默认不缩放，由容器控制布局 */
-    transform-origin: center center;
+    /* 增加边框质感 */
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 /* =========================================
@@ -175,8 +175,49 @@ body.presentation-mode .slide-container.active {
    6. 内容样式 (排版、图表、公式等) - 保持原样
    ========================================= */
 h1, h2, h3, h4 { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; margin: 0; color: #0f172a; }
-h1 { font-size: 56px; line-height: 1.2; letter-spacing: -0.02em; color: #0284c7; }
-h2 { font-size: 42px; margin-bottom: 30px; border-left: 6px solid #0ea5e9; padding-left: 20px; color: #0f172a; }
+h1 {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 800; /* 加粗 */
+    font-size: 56px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0;
+    
+    /* 渐变文字效果 */
+    background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* 如果浏览器不支持渐变文字，回退颜色 */
+    color: #0284c7; 
+    
+    /* 极淡的文字投影，增加立体感 */
+    text-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
+}
+
+h2 {
+    font-size: 42px;
+    margin-bottom: 35px;
+    /* 移除原本的实色左边框，改为渐变圆角条 */
+    border-left: none; 
+    position: relative;
+    padding-left: 25px;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+}
+
+/* 用伪元素做一个更高级的装饰条 */
+h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 80%;
+    width: 6px;
+    background: linear-gradient(to bottom, #0ea5e9, #60a5fa);
+    border-radius: 4px;
+}
 h3 { font-size: 26px; color: #0284c7; margin-bottom: 12px; }
 p, li { font-size: 20px; line-height: 1.6; color: #475569; font-family: 'Noto Sans SC', sans-serif; }
 .subtitle { font-size: 24px; color: #64748b; margin-top: 20px; font-weight: 400; }
@@ -186,10 +227,57 @@ p, li { font-size: 20px; line-height: 1.6; color: #475569; font-family: 'Noto Sa
 .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 30px; width: 100%; height: 420px; }
 .tiled-content { display: flex; gap: 30px; width: 100%; align-items: stretch; }
 
-.tile { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; flex: 1; display: flex; flex-direction: column; align-items: flex-start; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02); }
+.tile {
+    /* 1. 毛玻璃背景 */
+    background: rgba(255, 255, 255, 0.65); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); /* Safari 支持 */
+    
+    /* 2. 边框光泽 */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.9); /* 顶部更亮，模拟光照 */
+    
+    border-radius: 20px;
+    padding: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    /* 3. 初始状态的轻微阴影 */
+    box-shadow: 
+        0 4px 20px -2px rgba(0, 0, 0, 0.02),
+        0 1px 3px rgba(0,0,0,0.01);
+    
+    /* 4. 平滑过渡动画 */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 鼠标悬停时的交互感 */
+.tile:hover {
+    transform: translateY(-6px) scale(1.01); /* 微微上浮 */
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(14, 165, 233, 0.3); /* 边框变蓝 */
+    box-shadow: 
+        0 20px 40px -10px rgba(14, 165, 233, 0.15), /* 蓝色氛围光 */
+        0 10px 20px -5px rgba(0, 0, 0, 0.05);
+}
 .tile .icon { font-size: 36px; color: #0ea5e9; margin-bottom: 15px; background: rgba(14, 165, 233, 0.1); padding: 15px; border-radius: 12px; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
 
-.image-wrapper { width: 100%; height: 400px; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; position: relative; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+.image-wrapper {
+    width: 100%;
+    height: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    /* 白色相框边框 */
+    border: 6px solid #ffffff; 
+    position: relative;
+    /* 强烈的立体阴影 */
+    box-shadow: 
+        0 20px 30px -5px rgba(0, 0, 0, 0.1),
+        0 8px 10px -5px rgba(0, 0, 0, 0.04);
+    background: #fff;
+}
 .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 .image-wrapper.contain img { object-fit: contain; background: #f8fafc; }
 
