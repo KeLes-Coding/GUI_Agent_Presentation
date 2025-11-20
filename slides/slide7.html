@@ -1,18 +1,157 @@
-
-<div class="slide-container" id="slide7">
-    <h2>3. Jarvis 设计：语义动作与闭环</h2>
-    <div class="tiled-content">
-        <div class="tile">
-            <div class="icon"><i class="fa-solid fa-keyboard"></i></div>
-            <h3>语义动作模块</h3>
-            <p>摒弃不稳定坐标，采用 <code>tap(uid)</code>, <code>input(uid)</code>。</p>
-            <p>引入物理原语 <code>swipe(dir, mag)</code> 模拟人类直觉操作。</p>
-        </div>
-        <div class="tile">
-            <div class="icon"><i class="fa-solid fa-rotate"></i></div>
-            <h3>O-T-A 执行闭环</h3>
-            <p><strong>Observe:</strong> 获取截图与简化XML。</p>
-            <p><strong>Think:</strong> 输出 JSON <code>{"thought": "...", "action": "..."}</code>。</p>
-            <p><strong>Act:</strong> ADB执行 + 自动重试机制。</p>
+<div class="slide-container" id="slide6">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+        <h2 style="margin: 0;">NaturalGAIA 综合性能评估</h2>
+        <div style="font-size: 14px; color: #64748b; background: #f1f5f9; padding: 6px 12px; border-radius: 8px;">
+            Framework: <strong>LightManus</strong> | Benchmark: <strong>275 Tasks</strong>
         </div>
     </div>
+    
+    <div style="display: grid; grid-template-columns: 380px 1fr; gap: 30px; height: 560px;">
+        
+        <div style="
+            background: linear-gradient(160deg, #fffbeb 0%, #ffffff 60%, #fefce8 100%); 
+            border-radius: 20px; 
+            padding: 30px; 
+            border: 2px solid rgba(245, 158, 11, 0.3); 
+            box-shadow: 0 20px 40px -10px rgba(245, 158, 11, 0.15); 
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            overflow: hidden;
+        ">
+            <div style="position: absolute; top: -15px; right: -15px; width: 80px; height: 80px; background: #f59e0b; opacity: 0.1; border-radius: 50%;"></div>
+            <div style="position: absolute; top: 20px; right: 20px; color: #d97706; font-size: 24px;">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <div style="font-size: 12px; font-weight: 700; color: #d97706; letter-spacing: 1px; margin-bottom: 8px;">BEST PERFORMER</div>
+                <h3 style="font-size: 26px; color: #0f172a; margin: 0 0 5px 0;">LightManus</h3>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="background: rgba(245, 158, 11, 0.15); color: #b45309; padding: 4px 8px; border-radius: 6px; font-size: 13px; font-weight: 700;">
+                        <i class="fa-solid fa-robot"></i> Claude-3.5-Sonnet
+                    </span>
+                </div>
+            </div>
+
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                <div style="font-size: 14px; color: #78350f; margin-bottom: 0;">Overall Success Rate</div>
+                <div style="font-size: 72px; font-weight: 800; color: #0f172a; line-height: 1; letter-spacing: -2px;">
+                    42.9<span style="font-size: 32px;">%</span>
+                </div>
+                <div style="font-size: 14px; color: #d97706; margin-top: 8px; font-weight: 600;">
+                    <i class="fa-solid fa-check-double"></i> SOTA on Benchmark
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; border-top: 1px solid rgba(245, 158, 11, 0.2); padding-top: 20px;">
+                <div>
+                    <div style="font-size: 12px; color: #92400e;">WPSR (Quality)</div>
+                    <div style="font-size: 22px; font-weight: 700; color: #0f172a;">34.6</div>
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: #92400e;">MATCR (Stability)</div>
+                    <div style="font-size: 22px; font-weight: 700; color: #0f172a;">48.8%</div>
+                </div>
+                <div style="grid-column: span 2; background: rgba(255,255,255,0.6); padding: 10px; border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.2);">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+                        <span style="color: #78350f;">Level-2 (Intermediate)</span>
+                        <span style="font-weight: 700; color: #0f172a;">40.0%</span>
+                    </div>
+                    <div style="width: 100%; height: 6px; background: rgba(245, 158, 11, 0.1); border-radius: 3px;">
+                        <div style="width: 40%; height: 100%; background: #f59e0b; border-radius: 3px;"></div>
+                    </div>
+                    <div style="font-size: 11px; color: #92400e; margin-top: 4px;">唯一的 Level-2 高可用模型</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 25px;">
+            
+            <div style="background: white; padding: 25px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+                <h4 style="margin: 0 0 20px 0; font-size: 18px; color: #475569;">Framework Performance Comparison (Overall SR)</h4>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="display: grid; grid-template-columns: 180px 1fr 50px; align-items: center; gap: 15px;">
+                        <div style="font-size: 14px; color: #334155; font-weight: 600;">LightManus + Claude</div>
+                        <div style="height: 24px; background: #fef3c7; border-radius: 4px; overflow: hidden;">
+                            <div style="width: 42.9%; height: 100%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
+                        </div>
+                        <div style="font-size: 14px; font-weight: 700; color: #d97706;">42.9</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 180px 1fr 50px; align-items: center; gap: 15px;">
+                        <div style="font-size: 14px; color: #334155; font-weight: 600;">LightManus + Gemini</div>
+                        <div style="height: 24px; background: #e0f2fe; border-radius: 4px; overflow: hidden; position: relative;">
+                            <div style="width: 40.0%; height: 100%; background: linear-gradient(90deg, #0ea5e9, #38bdf8);"></div>
+                        </div>
+                        <div style="font-size: 14px; font-weight: 700; color: #0284c7;">40.0</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 180px 1fr 50px; align-items: center; gap: 15px;">
+                        <div style="font-size: 14px; color: #64748b;">LightManus + GPT-o3</div>
+                        <div style="height: 10px; background: #f1f5f9; border-radius: 5px;">
+                            <div style="width: 34.3%; height: 100%; background: #94a3b8;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #64748b;">34.3</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 180px 1fr 50px; align-items: center; gap: 15px;">
+                        <div style="font-size: 14px; color: #94a3b8;">Mobile-Agent-e (Gemini)</div>
+                        <div style="height: 10px; background: #f1f5f9; border-radius: 5px;">
+                            <div style="width: 22.9%; height: 100%; background: #cbd5e1;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #94a3b8;">22.9</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px; font-size: 13px; color: #0ea5e9; background: rgba(14, 165, 233, 0.08); padding: 10px; border-radius: 8px; display: inline-block;">
+                    <i class="fa-solid fa-arrow-trend-up"></i> <strong>Framework Gain:</strong> 使用相同 Gemini 后端，LightManus 相比 Mobile-Agent-e 提升了 <strong>74%</strong>。
+                </div>
+            </div>
+
+            <div style="flex: 1; background: white; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden;">
+                <div style="background: #f8fafc; padding: 10px 20px; border-bottom: 1px solid #e2e8f0; font-size: 13px; font-weight: 700; color: #64748b; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;">
+                    <div>Model</div>
+                    <div style="text-align: center;">Level-1</div>
+                    <div style="text-align: center;">Level-2</div>
+                    <div style="text-align: center;">Level-3</div>
+                    <div style="text-align: center;">WPSR</div>
+                </div>
+                
+                <div style="padding: 12px 20px; border-bottom: 1px solid #f1f5f9; font-size: 14px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; align-items: center;">
+                    <div style="font-weight: 600; color: #d97706;">LM + Claude</div>
+                    <div style="text-align: center; color: #334155;">60.0</div>
+                    <div style="text-align: center; font-weight: 700; color: #d97706; background: #fffbeb; border-radius: 4px;">40.0</div>
+                    <div style="text-align: center; font-weight: 700; color: #d97706; background: #fffbeb; border-radius: 4px;">20.0</div>
+                    <div style="text-align: center; font-weight: 700;">34.6</div>
+                </div>
+
+                <div style="padding: 12px 20px; border-bottom: 1px solid #f1f5f9; font-size: 14px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; align-items: center; background: rgba(14, 165, 233, 0.02);">
+                    <div style="font-weight: 600; color: #0284c7;">LM + Gemini</div>
+                    <div style="text-align: center; font-weight: 700; color: #0284c7; background: #e0f2fe; border-radius: 4px;">73.3</div>
+                    <div style="text-align: center; color: #334155;">20.0</div>
+                    <div style="text-align: center; color: #334155;">10.0</div>
+                    <div style="text-align: center; color: #334155;">29.9</div>
+                </div>
+
+                 <div style="padding: 12px 20px; border-bottom: 1px solid #f1f5f9; font-size: 14px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; align-items: center;">
+                    <div style="color: #64748b;">LM + GPT-o3</div>
+                    <div style="text-align: center; color: #64748b;">60.0</div>
+                    <div style="text-align: center; color: #64748b;">30.0</div>
+                    <div style="text-align: center; color: #94a3b8;">0.0</div>
+                    <div style="text-align: center; color: #64748b;">22.0</div>
+                </div>
+                
+                 <div style="padding: 12px 20px; font-size: 14px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; align-items: center; color: #94a3b8;">
+                    <div>Mobile-Agent-e</div>
+                    <div style="text-align: center;">46.7</div>
+                    <div style="text-align: center;">10.0</div>
+                    <div style="text-align: center;">0.0</div>
+                    <div style="text-align: center;">23.2</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

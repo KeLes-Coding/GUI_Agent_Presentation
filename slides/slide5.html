@@ -1,36 +1,86 @@
-<div class="slide-container" id="slide5">
-    <h2>3. 系统架构：LightManus</h2>
+<div class="slide-container" id="slide4_plus">
+    <h2>2. 基准构建：多级评估体系 (Metric Framework)</h2>
     
-    <div class="two-column">
+    <div class="content-area" style="display: flex; flex-direction: column; gap: 25px; justify-content: flex-start; padding-top: 10px;">
         
-        <div style="display: flex; flex-direction: column; gap: 30px;">
-            <div>
-                <h3 style="font-size: 24px; margin-bottom: 5px; color: #0284c7;">
-                    <i class="fa-solid fa-sitemap" style="margin-right: 10px;"></i>Task Parser
-                </h3>
-                <p style="font-size: 18px;">负责语义理解与长时序记忆管理。将用户指令分解为解耦的“原子任务序列”。</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%;">
+            
+            <div class="tile" style="padding: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; font-size: 24px;">Level 1: WPSR (加权路径成功率)</h3>
+                    <span style="background: #e0f2fe; color: #0284c7; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 700;">综合能力</span>
+                </div>
+                <p style="font-size: 16px; margin-bottom: 10px;">引入难度分数 $D_{j,i}$（正比于节点数与应用跨度），对成功任务进行加权。</p>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+                    <math display="block">
+                        <mtext>WPSR</mtext>
+                        <mo>=</mo>
+                        <munder>
+                            <mo>∑</mo>
+                            <mrow><mi>j</mi><mo>,</mo><mi>i</mi></mrow>
+                        </munder>
+                        <msub><mi>w</mi><mrow><mi>j</mi><mo>,</mo><mi>i</mi></mrow></msub>
+                        <mo>·</mo>
+                        <msub><mi mathvariant="double-struck">S</mi><mtext>task</mtext></msub>
+                        <mo>(</mo><mi>j</mi><mo>,</mo><mi>i</mi><mo>)</mo>
+                    </math>
+                </div>
             </div>
-            <div>
-                <h3 style="font-size: 24px; margin-bottom: 5px; color: #0284c7;">
-                    <i class="fa-solid fa-server" style="margin-right: 10px;"></i>Workflow Manager
-                </h3>
-                <p style="font-size: 18px;">跨平台动态调度层。根据任务类型，将指令分发至 Android (Jarvis) 或 PC 端执行。</p>
-            </div>
-            <div>
-                <h3 style="font-size: 24px; margin-bottom: 5px; color: #0284c7;">
-                    <i class="fa-solid fa-robot" style="margin-right: 10px;"></i>Execution Unit
-                </h3>
-                <p style="font-size: 18px;">在单应用环境下闭环执行具体指令。确保“搜索”、“点击”、“输入”等操作精准落地。</p>
+
+            <div class="tile" style="padding: 25px;">
+                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; font-size: 24px;">Level 2: 过程质量评估</h3>
+                    <span style="background: #f1f5f9; color: #64748b; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 700;">过程鲁棒性</span>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <div style="flex: 1;">
+                        <strong style="color: #0ea5e9; display: block; margin-bottom: 5px;">MATCR (平均完成率)</strong>
+                        <p style="font-size: 14px; line-height: 1.4;">衡量基础执行的稳定性。</p>
+                        <div style="font-size: 14px; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; margin-top: 5px;">
+                            $ \frac{1}{N} \sum (k_j / n_j) $
+                        </div>
+                    </div>
+                    <div style="width: 1px; height: 80px; background: #cbd5e1;"></div>
+                    <div style="flex: 1;">
+                        <strong style="color: #0ea5e9; display: block; margin-bottom: 5px;">p-ATSR (位置加权)</strong>
+                        <p style="font-size: 14px; line-height: 1.4;">$p(i)$ 随步数递增，奖励长时序连贯性。</p>
+                         <div style="font-size: 14px; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; margin-top: 5px;">
+                            $ \frac{\sum p(i) \cdot \mathbb{S}}{\sum p(i)} $
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
-            <img src="assets/大图_3.drawio.png" 
-                 alt="Layered software architecture diagram" 
-                 style="width: 100%; height: auto; max-height: 700px; object-fit: contain; 
-                        filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
-                        transform: scale(1.15);">
+        <div class="tile" style="padding: 25px; flex: none; height: auto;">
+             <h3 style="margin: 0 0 20px 0; font-size: 24px;">Level 3: 错误归因分析 (Error Attribution)</h3>
+             <div style="display: flex; gap: 30px;">
+                 <div style="flex: 1; background: #fff4f4; border: 1px solid #fecaca; border-radius: 12px; padding: 20px;">
+                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                         <i class="fa-solid fa-book-open" style="color: #ef4444;"></i>
+                         <strong style="color: #b91c1c; font-size: 18px;">Knowledge Deficit (KD)</strong>
+                     </div>
+                     <p style="font-size: 16px; color: #7f1d1d;">知识缺失：缺乏特定APP的操作知识或领域常识，不知道"该做什么"。</p>
+                 </div>
+
+                 <div style="flex: 1; background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 20px;">
+                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                         <i class="fa-solid fa-eye-slash" style="color: #d97706;"></i>
+                         <strong style="color: #92400e; font-size: 18px;">Perceptual Error (PE)</strong>
+                     </div>
+                     <p style="font-size: 16px; color: #78350f;">感知错误：规划正确，但对UI截图的文字或图标语义产生了误读。</p>
+                 </div>
+
+                 <div style="flex: 1; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px;">
+                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                         <i class="fa-solid fa-hand-pointer" style="color: #16a34a;"></i>
+                         <strong style="color: #166534; font-size: 18px;">Operational Error (OE)</strong>
+                     </div>
+                     <p style="font-size: 16px; color: #14532d;">操作错误：感知正确，但在执行具体点击或输入时动作偏离或失败。</p>
+                 </div>
+             </div>
         </div>
-        
+
     </div>
 </div>

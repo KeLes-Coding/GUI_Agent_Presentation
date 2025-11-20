@@ -1,30 +1,36 @@
-
-<div class="slide-container" id="slide6">
-    <h2>3. Jarvis 设计：双通道感知模块</h2>
+<div class="slide-container" id="slide5">
+    <h2>3. 系统架构：LightManus</h2>
+    
     <div class="two-column">
-        <div>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 30px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <i class="fa-solid fa-eye" style="color: #0ea5e9; font-size: 24px; margin-right: 15px;"></i>
-                        <strong style="font-size: 24px; color: #334155;">视觉流 (Visual Stream)</strong>
-                    </div>
-                    <p>利用 VLM (如 Qwen2.5-VL) 实时分析屏幕截图，理解图标语义与布局结构。</p>
-                </li>
-                <li style="margin-bottom: 30px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <i class="fa-solid fa-code" style="color: #0ea5e9; font-size: 24px; margin-right: 15px;"></i>
-                        <strong style="font-size: 24px; color: #334155;">结构流 (Structural Stream)</strong>
-                    </div>
-                    <p>解析 UI Automator XML，剔除视口外无效节点，降低上下文噪音。</p>
-                </li>
-                <li style="background: rgba(14, 165, 233, 0.1); padding: 20px; border-radius: 12px; border: 1px solid #0ea5e9;">
-                    <strong style="color: #0284c7;">创新点：UID 映射</strong>
-                    <p style="margin-top: 5px; font-size: 18px;">将复杂的 (x,y) 回归问题转化为基于唯一 ID (uid) 的分类问题，显著提升点击精度。</p>
-                </li>
-            </ul>
+        
+        <div style="display: flex; flex-direction: column; gap: 30px;">
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 5px; color: #0284c7;">
+                    <i class="fa-solid fa-sitemap" style="margin-right: 10px;"></i>Task Parser
+                </h3>
+                <p style="font-size: 18px;">负责语义理解与长时序记忆管理。将用户指令分解为解耦的“原子任务序列”。</p>
+            </div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 5px; color: #0284c7;">
+                    <i class="fa-solid fa-server" style="margin-right: 10px;"></i>Workflow Manager
+                </h3>
+                <p style="font-size: 18px;">跨平台动态调度层。根据任务类型，将指令分发至 Android (Jarvis) 或 PC 端执行。</p>
+            </div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 5px; color: #0284c7;">
+                    <i class="fa-solid fa-robot" style="margin-right: 10px;"></i>Execution Unit
+                </h3>
+                <p style="font-size: 18px;">在单应用环境下闭环执行具体指令。确保“搜索”、“点击”、“输入”等操作精准落地。</p>
+            </div>
         </div>
-        <div class="image-wrapper contain">
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/6761861360593931201" alt="Smartphone screen analysis with bounding boxes">
+
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+            <img src="assets/大图_3.drawio.png" 
+                 alt="Layered software architecture diagram" 
+                 style="width: 100%; height: auto; max-height: 700px; object-fit: contain; 
+                        filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
+                        transform: scale(1.15);">
         </div>
+        
     </div>
+</div>

@@ -1,28 +1,24 @@
-<div class="slide-container" id="slide10">
-    <h2>微观信用分配 (Causal Credit Assignment)</h2>
-    <div class="content-area">
+
+<div class="slide-container" id="slide8">
+    <h2>核心算法：CCAPO</h2>
+    <p class="subtitle" style="margin-bottom: 40px;">Counterfactual & Causal Advantage Policy Optimization</p>
+    
+    <div class="content-area" style="flex-direction: column;">
+        <div style="background: #f1f5f9; padding: 30px 50px; border-radius: 16px; border: 1px solid #cbd5e1; margin-bottom: 50px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); font-size: 28px; text-align: center;">
+            $$ L_{\text{CCAPO}} = (1-\lambda) \cdot L_{\text{online}} + \lambda \cdot L_{\text{buffer}} $$
+        </div>
+
         <div class="tiled-content">
-            <div class="tile" style="flex: 1;">
-                <div class="icon"><i class="fa-solid fa-weight-hanging"></i></div>
-                <h3>重要性分数 $I_{\text{action}}$</h3>
-                
-                <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 15px 0; width: 100%; text-align: center; border: 1px solid #e2e8f0; font-size: 20px;">
-                    $$ \text{Necessity} \times \text{Utility} $$
-                </div>
-                
-                <p>量化每个动作不仅是"正确的"，而且是"必要的"。</p>
+            <div class="tile" style="align-items: center; text-align: center;">
+                <h3 style="margin-bottom: 10px;">混合优势函数</h3>
+                <p style="font-size: 16px;">宏观防作弊 + 微观因果感知</p>
             </div>
-            
-            <div class="tile" style="flex: 1;">
-                 <div class="icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
-                <h3>动态权重衰减</h3>
-                <p>随着训练成功率 ($\lambda_{SR}$) 的提升，逐渐降低微观奖励权重。</p>
-                <p style="font-size: 16px; color: #64748b; margin-top: 10px;">从依赖“手把手教”过渡到“结果导向”。</p>
+            <div class="tile" style="align-items: center; text-align: center;">
+                <h3 style="margin-bottom: 10px;">STDB 轨迹库</h3>
+                <p style="font-size: 16px;">Top-K 经验存储与动态更新</p>
             </div>
-            
-             <div class="tile" style="flex: 1; padding: 0; overflow: hidden; border: none;">
-                 <img src="http://googleusercontent.com/image_collection/image_retrieval/11286212088718003212" style="width: 100%; height: 100%; object-fit: cover;" alt="Neural network nodes abstract">
+            <div class="tile" style="align-items: center; text-align: center;">
+                <h3 style="margin-bottom: 10px;">混合计算组</h3>
+                <p style="font-size: 16px;">解决长序列任务的零梯度问题</p>
             </div>
         </div>
-    </div>
-</div>
