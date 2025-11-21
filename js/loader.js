@@ -25,14 +25,24 @@ async function loadSlides() {
             const currentSlideElement = container.lastElementChild;
             
             // --- 注入 1: 校徽 (右上角) ---
-            // 请确保 assets/scnu_logo.png 存在。如果你的图片是 jpg 或其他名字，请修改这里。
-            // 如果没有图片，它会显示一个裂开的图标，但位置是对的。
+            // 请确保 assets/scnu_logo.png 存在
             const logoImg = `<img src="assets/scnu_logo.png" class="scnu-logo" alt="SCNU Logo">`;
             currentSlideElement.insertAdjacentHTML('beforeend', logoImg);
 
             // --- 注入 2: 页码 (右下角) ---
             const pageNumDiv = `<div class="slide-page-number">${slideIndex}</div>`;
             currentSlideElement.insertAdjacentHTML('beforeend', pageNumDiv);
+            
+            // --- [新增] 注入 3: 返回目录按钮 (左下角) ---
+            // 逻辑：只有 Slide 3 及以后的页面才显示
+            if (slideIndex > 2) {
+                const backBtn = `
+                    <a href="#slide2" class="back-to-dir-btn" title="Back to Directory">
+                        <i class="fa-solid fa-list-ul"></i>
+                    </a>
+                `;
+                currentSlideElement.insertAdjacentHTML('beforeend', backBtn);
+            }
             
             slideIndex++;
             

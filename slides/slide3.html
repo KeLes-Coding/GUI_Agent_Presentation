@@ -1,20 +1,67 @@
-
 <div class="slide-container" id="slide3">
     <h2>1. 研究背景与挑战：GUI智能体的困境</h2>
-    <div class="tiled-content">
-        <div class="tile">
-            <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-            <h3>评估的模糊性</h3>
-            <p>现有基准（如WebArena）仅依赖最终状态判定。长链路任务中，中间步骤的错误难以被精确衡量，导致“结果正确但过程错误”的假阳性。</p>
+    
+    <div class="tiled-content" style="align-items: stretch; gap: 25px;">
+        
+        <div class="tile" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <h3 style="font-size: 22px; margin-bottom: 12px;">基准评估的局限性</h3>
+                <p style="font-size: 16px; color: #475569; line-height: 1.5; text-align: justify;">
+                    现有基准多依赖静态环境与最终状态判定，缺乏对中间过程的细粒度验证，导致“结果正确但过程错误”的假阳性。此外，仿真与真实环境存在巨大鸿沟（如 SOTA 模型在真实 OS 上的性能落差），难以精准衡量动态环境下的执行鲁棒性。
+                </p>
+            </div>
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                <span style="font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Examples</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                    <span style="background: #f1f5f9; color: #64748b; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">GAIA</span>
+                    <span style="background: #f1f5f9; color: #64748b; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">WebArena</span>
+                    <span style="background: #f1f5f9; color: #64748b; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">WindowsAgentArena</span>
+                    <span style="background: #f1f5f9; color: #64748b; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">AndroidWorld</span>
+                </div>
+            </div>
         </div>
-        <div class="tile">
-            <div class="icon"><i class="fa-solid fa-arrows-split-up-and-left"></i></div>
-            <h3>规划-执行鸿沟</h3>
-            <p>高层语义指令（如“订一张去北京的票”）与底层精准操作（点击坐标 (x,y)）之间存在巨大语义落差，导致模型幻觉。</p>
+
+        <div class="tile" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                    <i class="fa-solid fa-sitemap"></i>
+                </div>
+                <h3 style="font-size: 22px; margin-bottom: 12px;">架构的规划-执行鸿沟</h3>
+                <p style="font-size: 16px; color: #475569; line-height: 1.5; text-align: justify;">
+                    通用架构难以兼顾规划与落地。混合架构（如 UFO）依赖的底层结构化数据（XML/UIA）常含噪声与缺失；而纯视觉架构（如 Mobile-Agent）在像素级定位上存在精度短板。高层语义指令难以精准转化为底层 (x,y) 操作，频发幻觉。
+                </p>
+            </div>
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                <span style="font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Examples</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                    <span style="background: #fffbeb; color: #d97706; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">AutoGLM</span>
+                    <span style="background: #fffbeb; color: #d97706; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">UFO</span>
+                    <span style="background: #fffbeb; color: #d97706; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">Mobile-Agent</span>
+                </div>
+            </div>
         </div>
-        <div class="tile">
-            <div class="icon"><i class="fa-solid fa-battery-empty"></i></div>
-            <h3>稀疏奖励难题</h3>
-            <p>在数十步的长序列操作中，只有最后一步成功才有奖励。一旦失败，传统RL算法（如GRPO）面临严重的“零梯度”问题。</p>
+
+        <div class="tile" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="icon" style="background: rgba(14, 165, 233, 0.1); color: #0ea5e9;">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h3 style="font-size: 22px; margin-bottom: 12px;">RL 优化的稀疏奖励</h3>
+                <p style="font-size: 16px; color: #475569; line-height: 1.5; text-align: justify;">
+                    长链路交互面临极端的奖励稀疏性。传统算法（如 GRPO）常因“全负样本组”陷入“零梯度”陷阱，导致探索停滞。且缺乏有效的经验回放与过程监督机制（如 PPR 的复杂性），使得在线探索成本高昂、样本效率极低。
+                </p>
+            </div>
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                <span style="font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Examples</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                    <span style="background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">WebRL</span>
+                    <span style="background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">ARPO</span>
+                    <span style="background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">GRPO</span>
+                </div>
+            </div>
         </div>
     </div>
+</div>

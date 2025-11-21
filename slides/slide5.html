@@ -1,83 +1,87 @@
-<div class="slide-container" id="slide4_plus">
+<div class="slide-container" id="slide5">
     <h2>2. 基准构建：多级评估体系 (Metric Framework)</h2>
     
-    <div class="content-area" style="display: flex; flex-direction: column; gap: 25px; justify-content: flex-start; padding-top: 10px;">
+    <div class="content-area" style="display: flex; flex-direction: column; gap: 20px; justify-content: flex-start;">
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%;">
+        <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 25px; width: 100%;">
             
-            <div class="tile" style="padding: 25px;">
+            <div class="tile" style="padding: 25px; display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h3 style="margin: 0; font-size: 24px;">Level 1: WPSR (加权路径成功率)</h3>
-                    <span style="background: #e0f2fe; color: #0284c7; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 700;">综合能力</span>
+                    <h3 style="margin: 0; font-size: 22px;">Level 1: WPSR (综合能力)</h3>
+                    <span style="background: #e0f2fe; color: #0284c7; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;">Weighted Success</span>
                 </div>
-                <p style="font-size: 16px; margin-bottom: 10px;">引入难度分数 $D_{j,i}$（正比于节点数与应用跨度），对成功任务进行加权。</p>
-                <div style="background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
-                    <math display="block">
-                        <mtext>WPSR</mtext>
-                        <mo>=</mo>
-                        <munder>
-                            <mo>∑</mo>
-                            <mrow><mi>j</mi><mo>,</mo><mi>i</mi></mrow>
-                        </munder>
-                        <msub><mi>w</mi><mrow><mi>j</mi><mo>,</mo><mi>i</mi></mrow></msub>
-                        <mo>·</mo>
-                        <msub><mi mathvariant="double-struck">S</mi><mtext>task</mtext></msub>
-                        <mo>(</mo><mi>j</mi><mo>,</mo><mi>i</mi><mo>)</mo>
-                    </math>
+                
+                <p style="font-size: 15px; color: #475569; margin-bottom: 15px; line-height: 1.5;">
+                    引入难度分数 <b>$D_{j,i}$</b>（正比于<b>节点数</b>与<b>应用跨度</b>），作为归一化权重 <b>$w_{j,i}$</b>。
+                </p>
+
+                <div style="margin-top: auto; background: linear-gradient(to right, rgba(14, 165, 233, 0.08), rgba(14, 165, 233, 0)); border-left: 4px solid #0ea5e9; padding: 15px; border-radius: 0 8px 8px 0;">
+                    <div style="font-size: 18px; color: #0f172a;">
+                        $$ \text{WPSR} = \sum_{j,i} w_{j,i} \cdot \mathbb{S}_{\text{task}}(j,i) $$
+                    </div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 5px;">
+                        衡量最终任务完成能力的综合指标 (Holistic Metric)。
+                    </div>
                 </div>
             </div>
 
-            <div class="tile" style="padding: 25px;">
+            <div class="tile" style="padding: 25px; display: flex; flex-direction: column;">
                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h3 style="margin: 0; font-size: 24px;">Level 2: 过程质量评估</h3>
-                    <span style="background: #f1f5f9; color: #64748b; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 700;">过程鲁棒性</span>
+                    <h3 style="margin: 0; font-size: 22px;">Level 2: 过程质量评估</h3>
+                    <span style="background: #f1f5f9; color: #64748b; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;">Process Robustness</span>
                 </div>
                 
-                <div style="display: flex; gap: 20px; align-items: center;">
-                    <div style="flex: 1;">
-                        <strong style="color: #0ea5e9; display: block; margin-bottom: 5px;">MATCR (平均完成率)</strong>
-                        <p style="font-size: 14px; line-height: 1.4;">衡量基础执行的稳定性。</p>
-                        <div style="font-size: 14px; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; margin-top: 5px;">
-                            $ \frac{1}{N} \sum (k_j / n_j) $
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; height: 100%;">
+                    <div style="background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 15px; display: flex; flex-direction: column;">
+                        <strong style="color: #0ea5e9; font-size: 16px;">MATCR</strong>
+                        <span style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">Foundational Reliability</span>
+                        <div style="font-size: 15px; color: #334155; margin-bottom: 8px; line-height: 1.4;">
+                            量化<strong>平均执行长度</strong>：通过计算连续成功占比 ($k_j/n_j$)，评估基础可靠性。
+                        </div>
+                        <div style="margin-top: auto; text-align: center; font-size: 12px;">
+                             $ \text{MATCR} = \frac{1}{N} \sum_{j=1}^{N} \frac{k_j}{n_j} $
                         </div>
                     </div>
-                    <div style="width: 1px; height: 80px; background: #cbd5e1;"></div>
-                    <div style="flex: 1;">
-                        <strong style="color: #0ea5e9; display: block; margin-bottom: 5px;">p-ATSR (位置加权)</strong>
-                        <p style="font-size: 14px; line-height: 1.4;">$p(i)$ 随步数递增，奖励长时序连贯性。</p>
-                         <div style="font-size: 14px; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; margin-top: 5px;">
-                            $ \frac{\sum p(i) \cdot \mathbb{S}}{\sum p(i)} $
+
+                    <div style="background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 15px; display: flex; flex-direction: column;">
+                        <strong style="color: #0ea5e9; font-size: 16px;">p-ATSR</strong>
+                        <span style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">Long-term Coherence</span>
+                        <div style="font-size: 15px; color: #334155; margin-bottom: 8px; line-height: 1.4;">
+                            强调<strong>长时序连贯性</strong>：利用递增权重 $p(i)$ 奖励<strong>后期成功</strong>，评估长序执行能力。
+                        </div>
+                        <div style="margin-top: auto; text-align: center; font-size: 12px;">
+                             $ \text{p-ATSR} = \frac{\sum_{j=1}^{N} \sum_{i=1}^{n_j} p(i) \cdot \mathbb{S}_{\text{atomic}}(j, i)}{\sum_{j=1}^{N} \sum_{i=1}^{n_j} p(i)} $
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="tile" style="padding: 25px; flex: none; height: auto;">
-             <h3 style="margin: 0 0 20px 0; font-size: 24px;">Level 3: 错误归因分析 (Error Attribution)</h3>
-             <div style="display: flex; gap: 30px;">
-                 <div style="flex: 1; background: #fff4f4; border: 1px solid #fecaca; border-radius: 12px; padding: 20px;">
-                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <div class="tile" style="padding: 20px 25px; flex: none; height: auto;">
+             <h3 style="margin: 0 0 15px 0; font-size: 22px;">Level 3: 错误归因分析 (Error Attribution)</h3>
+             <div style="display: flex; gap: 25px;">
+                 <div style="flex: 1; background: #fff4f4; border: 1px solid #fecaca; border-radius: 10px; padding: 15px;">
+                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
                          <i class="fa-solid fa-book-open" style="color: #ef4444;"></i>
-                         <strong style="color: #b91c1c; font-size: 18px;">Knowledge Deficit (KD)</strong>
+                         <strong style="color: #b91c1c; font-size: 16px;">Knowledge Deficit</strong>
                      </div>
-                     <p style="font-size: 16px; color: #7f1d1d;">知识缺失：缺乏特定APP的操作知识或领域常识，不知道"该做什么"。</p>
+                     <p style="font-size: 14px; color: #7f1d1d; margin: 0;">缺乏特定 APP 操作知识或常识。</p>
                  </div>
 
-                 <div style="flex: 1; background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 20px;">
-                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                 <div style="flex: 1; background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 15px;">
+                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
                          <i class="fa-solid fa-eye-slash" style="color: #d97706;"></i>
-                         <strong style="color: #92400e; font-size: 18px;">Perceptual Error (PE)</strong>
+                         <strong style="color: #92400e; font-size: 16px;">Perceptual Error</strong>
                      </div>
-                     <p style="font-size: 16px; color: #78350f;">感知错误：规划正确，但对UI截图的文字或图标语义产生了误读。</p>
+                     <p style="font-size: 14px; color: #78350f; margin: 0;">规划正确，但误读 UI 语义或状态。</p>
                  </div>
 
-                 <div style="flex: 1; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px;">
-                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                 <div style="flex: 1; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 15px;">
+                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
                          <i class="fa-solid fa-hand-pointer" style="color: #16a34a;"></i>
-                         <strong style="color: #166534; font-size: 18px;">Operational Error (OE)</strong>
+                         <strong style="color: #166534; font-size: 16px;">Operational Error</strong>
                      </div>
-                     <p style="font-size: 16px; color: #14532d;">操作错误：感知正确，但在执行具体点击或输入时动作偏离或失败。</p>
+                     <p style="font-size: 14px; color: #14532d; margin: 0;">动作偏离或系统执行失败。</p>
                  </div>
              </div>
         </div>
