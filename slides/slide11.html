@@ -1,24 +1,98 @@
 <div class="slide-container" id="slide11">
-    <h2>混合优势函数：$A_{\text{final}}$</h2>
-    <div class="two-column">
-        <div>
-            <div style="background: #f1f5f9; padding: 30px; border-radius: 16px; border: 1px solid #cbd5e1; margin-bottom: 30px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); font-size: 24px; text-align: center;">
-                $$
-                A_{\text{final}}(a_t) = A_{\text{traj}}(\tau) + \omega \cdot A_{\text{step}}(a_t)
-                $$
+    <h2>宏观优势：$A_{\text{traj}}$ (Macro Outcome)</h2>
+    
+    <div class="two-column" style="gap: 40px;">
+        
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div style="font-size: 18px; color: #64748b; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">
+                Step 1: Core Validity Check ($R_{\text{core}}$)
             </div>
-            <p>结合宏观轨迹结果与微观步骤贡献，平衡长期目标与短期反馈。</p>
+
+            <div class="tile" style="padding: 20px; border-left: 6px solid #ef4444; flex-direction: row; align-items: center; justify-content: space-between; min-height: auto;">
+                <div>
+                    <div style="font-size: 18px; color: #b91c1c; font-weight: 700; margin-bottom: 4px;">
+                        <i class="fa-solid fa-xmark" style="margin-right: 8px;"></i>Task Failed
+                    </div>
+                    <div style="font-size: 14px; color: #7f1d1d;">$R_{\text{success}} \le 0$</div>
+                </div>
+                <div style="font-size: 24px; font-weight: 800; color: #ef4444;">-1.0</div>
+            </div>
+
+            <div class="tile" style="padding: 20px; border-left: 6px solid #f59e0b; flex-direction: row; align-items: center; justify-content: space-between; min-height: auto; background: #fffbeb;">
+                <div>
+                    <div style="font-size: 18px; color: #b45309; font-weight: 700; margin-bottom: 4px;">
+                        <i class="fa-solid fa-ban" style="margin-right: 8px;"></i>Shortcut / Cheating
+                    </div>
+                    <div style="font-size: 14px; color: #92400e;">
+                        Steps <span style="font-family: 'Latin Modern Math', serif;">&lt; MinReasonable</span>
+                    </div>
+                </div>
+                <div style="font-size: 24px; font-weight: 800; color: #d97706;">0.0</div>
+            </div>
+
+            <div class="tile" style="padding: 20px; border-left: 6px solid #10b981; flex-direction: row; align-items: center; justify-content: space-between; min-height: auto; background: #f0fdf4; box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15);">
+                <div>
+                    <div style="font-size: 18px; color: #047857; font-weight: 700; margin-bottom: 4px;">
+                        <i class="fa-solid fa-check-double" style="margin-right: 8px;"></i>Valid Success
+                    </div>
+                    <div style="font-size: 14px; color: #065f46;">Logic Consistent & Steps Reasonable</div>
+                </div>
+                <div style="font-size: 24px; font-weight: 800; color: #059669;">+1.0</div>
+            </div>
+            
+            <div style="margin-top: 5px; font-size: 14px; color: #64748b; font-style: italic;">
+                * 相比传统方法，强制归零“侥幸成功”样本，防止 Reward Hacking。
+            </div>
         </div>
-        <div>
-            <div class="tile" style="margin-bottom: 20px;">
-                <h4 style="color: #0ea5e9; margin-bottom: 10px;">宏观优势 ($A_{\text{traj}}$)</h4>
-                <p style="font-size: 18px;"><strong>防作弊 (Anti-Shortcut):</strong> 若步数过少判定为侥幸，强制归零。</p>
-                <p style="font-size: 18px;"><strong>有效奖励:</strong> 仅奖励真实有效的成功轨迹。</p>
+
+        <div style="display: flex; flex-direction: column; height: 100%; justify-content: flex-start;">
+            <div style="font-size: 18px; color: #64748b; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                Step 2: Efficiency Modulation ($R_{\tau}$)
             </div>
-            <div class="tile">
-                <h4 style="color: #0ea5e9; margin-bottom: 10px;">微观优势 ($A_{\text{step}}$)</h4>
-                <p style="font-size: 18px;">引入因果感知，量化单步动作对最终成功的边际贡献。</p>
+
+            <div class="tile" style="padding: 30px; background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                
+                <div style="margin-bottom: 30px; text-align: center;">
+                    <div style="font-size: 14px; color: #94a3b8; margin-bottom: 10px; font-weight: 600;">FINAL REWARD FORMULA</div>
+                    <div style="font-size: 26px; color: #1e293b; font-family: 'Latin Modern Math', serif;">
+                        $$
+                        R_{\tau} = \begin{cases} 
+                        R_{\text{core}} \cdot M_{\text{steps}} \cdot M_{\text{token}} & \text{if } +1.0 \\
+                        R_{\text{core}} & \text{else}
+                        \end{cases}
+                        $$
+                    </div>
+                </div>
+
+                <div style="border-top: 1px dashed #cbd5e1; padding-top: 25px; display: flex; flex-direction: column; gap: 20px;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <strong style="color: #0284c7; font-size: 18px;">Step Efficiency</strong>
+                            <span style="font-family: 'Latin Modern Math', serif; color: #475569;">$M_{\text{steps}} = 1 - \frac{\text{Steps}}{\text{MaxSteps}}$</span>
+                        </div>
+                        <div style="width: 100%; height: 6px; background: #e0f2fe; border-radius: 3px;">
+                            <div style="width: 70%; height: 100%; background: #0ea5e9; border-radius: 3px;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <strong style="color: #0284c7; font-size: 18px;">Token Efficiency</strong>
+                             <span style="font-family: 'Latin Modern Math', serif; color: #475569;">$M_{\text{token}} = 1 - \frac{\text{Tokens}}{\text{MaxTokens}}$</span>
+                        </div>
+                        <div style="width: 100%; height: 6px; background: #e0f2fe; border-radius: 3px;">
+                            <div style="width: 85%; height: 100%; background: #0ea5e9; border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px; background: rgba(14, 165, 233, 0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(14, 165, 233, 0.2); font-size: 15px; color: #334155;">
+                    <i class="fa-solid fa-lightbulb" style="color: #0ea5e9; margin-right: 8px;"></i>
+                    <strong>设计直觉：</strong> 只有“真实有效”的成功才值得谈论效率。错误的路径无论多快（Token 消耗多低），都没有优化价值。
+                </div>
+
             </div>
         </div>
+        
     </div>
 </div>

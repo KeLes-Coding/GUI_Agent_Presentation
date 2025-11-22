@@ -1,28 +1,101 @@
 <div class="slide-container" id="slide12">
-    <h2>微观信用分配 (Causal Credit Assignment)</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile" style="flex: 1;">
-                <div class="icon"><i class="fa-solid fa-weight-hanging"></i></div>
-                <h3>重要性分数 $I_{\text{action}}$</h3>
-                
-                <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 15px 0; width: 100%; text-align: center; border: 1px solid #e2e8f0; font-size: 20px;">
-                    $$ \text{Necessity} \times \text{Utility} $$
+    <h2>微观优势：$A_{\text{step}}$ (Causal Credit Assignment)</h2>
+    
+    <div class="two-column" style="gap: 30px; align-items: stretch; margin-bottom: 40px;">
+        
+        <div class="tile" style="padding: 25px; display: flex; flex-direction: column; flex: 1;">
+            
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div class="icon" style="background: rgba(14, 165, 233, 0.1); color: #0ea5e9; margin-right: 15px; margin-bottom: 0; width: 50px; height: 50px; font-size: 24px;">
+                    <i class="fa-solid fa-crosshairs"></i>
                 </div>
-                
-                <p>量化每个动作不仅是"正确的"，而且是"必要的"。</p>
+                <div>
+                    <h3 style="margin: 0; color: #0f172a; font-size: 22px;">动作价值 ($I_{\text{action}}$)</h3>
+                    <div style="font-size: 14px; color: #64748b;">Importance ≈ Necessity × Utility</div>
+                </div>
             </div>
             
-            <div class="tile" style="flex: 1;">
-                 <div class="icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
-                <h3>动态权重衰减</h3>
-                <p>随着训练成功率 ($\lambda_{SR}$) 的提升，逐渐降低微观奖励权重。</p>
-                <p style="font-size: 16px; color: #64748b; margin-top: 10px;">从依赖“手把手教”过渡到“结果导向”。</p>
+            <div style="background: #f0f9ff; padding: 25px; border-radius: 8px; border-left: 4px solid #0ea5e9; margin-bottom: 20px;">
+                <div style="font-size: 13px; color: #0284c7; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">
+                    <i class="fa-solid fa-location-dot" style="margin-right: 6px;"></i>Design Philosophy
+                </div>
+                <p style="margin: 0; font-size: 14px; color: #334155; line-height: 1.4;">
+                    引入 <strong>位置感知 ($b_{stage}$)</strong>，将轨迹动态映射为 <strong>Early / Mid / Late</strong> 阶段。
+                    <br><span style="color: #64748b; font-size: 13px;">(同样的动作在不同阶段，其价值权重完全不同)</span>
+                </p>
             </div>
-            
-             <div class="tile" style="flex: 1; padding: 0; overflow: hidden; border: none;">
-                 <img src="http://googleusercontent.com/image_collection/image_retrieval/11286212088718003212" style="width: 100%; height: 100%; object-fit: cover;" alt="Neural network nodes abstract">
+
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                <div style="display: flex; gap: 15px;">
+                     <div style="min-width: 40px; height: 40px; background: #f1f5f9; color: #475569; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700;">1</div>
+                     <div>
+                         <strong style="color: #334155; font-size: 16px;">必要性 (Necessity)</strong>
+                         <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 3px;">"Is it Expected?"</div>
+                         <p style="margin: 0; font-size: 14px; color: #64748b; line-height: 1.4;">
+                             <strong>关键路径拟合：</strong> 衡量动作在当前阶段属于“成功范式”的概率。
+                             <br><em>“成功的轨迹通常会在这个时候执行此操作吗？”</em>
+                         </p>
+                     </div>
+                </div>
+
+                <div style="display: flex; gap: 15px;">
+                     <div style="min-width: 40px; height: 40px; background: #fff1f2; color: #be185d; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700;">2</div>
+                     <div>
+                         <strong style="color: #be185d; font-size: 16px;">效用性 (Utility)</strong>
+                         <div style="font-size: 12px; color: #fda4af; font-weight: 600; text-transform: uppercase; margin-bottom: 3px;">"Does it Cause Success?"</div>
+                         <p style="margin: 0; font-size: 14px; color: #64748b; line-height: 1.4;">
+                             <strong>因果增益分析：</strong> 衡量动作对成功率的<strong>提升幅度</strong>。
+                             <br>区分 <span style="color: #be185d; font-weight: 600;">关键动作</span> (低频高能) 与 <span style="color: #94a3b8;">平庸动作</span> (高频低能，如 Tap)。
+                         </p>
+                     </div>
+                </div>
             </div>
         </div>
+
+        <div class="tile" style="padding: 25px; display: flex; flex-direction: column; flex: 1;">
+             <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div class="icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981; margin-right: 15px; margin-bottom: 0; width: 50px; height: 50px; font-size: 24px;">
+                    <i class="fa-solid fa-stopwatch-20"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0; color: #0f172a; font-size: 22px;">执行效率 ($Q_{\text{efficiency}}$)</h3>
+                    <div style="font-size: 14px; color: #64748b;">Do More with Less</div>
+                </div>
+            </div>
+
+            <div style="background: #f0fdf4; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; border: 1px dashed #86efac;">
+                <strong style="color: #15803d; font-size: 18px;">Efficiency</strong> 
+                <span style="color: #94a3b8; margin: 0 8px;">≈</span>
+                <strong style="color: #15803d;">Step Score</strong> 
+                <span style="color: #94a3b8; margin: 0 8px;">×</span>
+                <strong style="color: #15803d;">Economy Score</strong>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 15px; flex: 1;">
+                
+                <div style="background: white; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                        <strong style="color: #0f172a; font-size: 15px;">Valid Step Focus</strong>
+                        <span style="background: #e0f2fe; color: #0284c7; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 700;">$N_{\text{success}}$ ONLY</span>
+                    </div>
+                    <p style="margin: 0; font-size: 14px; color: #475569;">
+                        仅考量 <strong style="color: #0ea5e9;">成功执行</strong> 的步骤数量。失败步骤（如格式错误）不计入效率分母，避免双重惩罚。
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                        <strong style="color: #0f172a; font-size: 15px;">Relative Economy</strong>
+                        <span style="background: #fef3c7; color: #d97706; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Vs. AVERAGE</span>
+                    </div>
+                    <p style="margin: 0; font-size: 14px; color: #475569;">
+                        基于计算组均值 ($AvgTokenCost$) 的动态奖惩：
+                        <br>• Cost < Avg → <span style="color: #16a34a; font-weight: 700;">Bonus (>1.0)</span>
+                        <br>• Cost > Avg → <span style="color: #dc2626; font-weight: 700;">Penalty (<1.0)</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

@@ -1,25 +1,104 @@
-
 <div class="slide-container" id="slide13">
-    <h2>动态经验回放 (STDB) 与锚点匹配</h2>
-    <div class="two-column">
-        <div>
-            <h3 style="color: #0ea5e9;">从失败中学习</h3>
-            <div class="tile" style="margin-bottom: 20px; background: transparent; border: 1px dashed #94a3b8;">
-                <strong style="color: #64748b;">传统方法:</strong>
-                <p>失败轨迹通常被“一刀切”地惩罚，浪费了其中可能存在的正确片段。</p>
+    <h2>STDB 动态轨迹库与锚点匹配</h2>
+    
+    <div class="two-column" style="gap: 30px; align-items: stretch; margin-bottom: 40px;">
+        
+        <div class="tile" style="padding: 25px; display: flex; flex-direction: column; flex: 1;">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <div class="icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; margin-right: 15px; margin-bottom: 0; width: 50px; height: 50px; font-size: 24px;">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0; color: #0f172a; font-size: 22px;">STDB 维护机制</h3>
+                    <div style="font-size: 14px; color: #64748b;">Success Trajectory Database</div>
+                </div>
             </div>
-            <div class="tile" style="background: rgba(14, 165, 233, 0.05); border-color: #0ea5e9;">
-                <strong style="color: #0284c7;">CCAPO 方法:</strong>
-                <p>将失败轨迹步骤与 STDB 中的 <strong>锚点 (高分思维-动作对)</strong> 进行匹配。</p>
-                <p>若局部动作与“标准答案”高度相似，给予部分奖励。</p>
+
+            <div style="display: flex; flex-direction: column; gap: 15px; flex: 1;">
+                
+                <div style="background: #fffbeb; padding: 15px; border-radius: 10px; border: 1px solid #fcd34d;">
+                    <strong style="color: #b45309; font-size: 15px; display: block; margin-bottom: 8px;">
+                        <i class="fa-solid fa-list-ul" style="margin-right: 6px;"></i>Structure & Source
+                    </strong>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #78350f; line-height: 1.5;">
+                        <li style="margin-bottom: 4px;"><strong>索引 (Index):</strong> 按 <code>Prompt/Task</code> 分类存储。</li>
+                        <li style="margin-bottom: 4px;"><strong>容量 (Top-K):</strong> 仅保留 $K$ 条最高分轨迹。</li>
+                        <li><strong>来源 (Origin):</strong> 纯模型 <code>Rollout</code> (无需人工示范)。</li>
+                    </ul>
+                </div>
+
+                <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; flex: 1; display: flex; flex-direction: column;">
+                    <strong style="color: #334155; font-size: 15px; display: block; margin-bottom: 10px;">
+                        <i class="fa-solid fa-rotate" style="margin-right: 6px;"></i>Dynamic Update (Priority Queue)
+                    </strong>
+                    
+                    <div style="font-size: 14px; color: #64748b; margin-bottom: 10px; line-height: 1.4;">
+                        当产生新成功轨迹 $\tau_{new}$ 时，执行<strong>优胜劣汰</strong>：
+                    </div>
+
+                    <div style="background: white; border: 1px dashed #cbd5e1; padding: 10px; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 13px; color: #475569; margin-bottom: 5px;">Condition</div>
+                        <div style="font-family: 'Latin Modern Math', serif; color: #0f172a; font-size: 16px;">
+                            $A_{\text{final}}(\tau_{new}) > \min_{\tau \in DB}(A_{\text{final}})$
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 8px; font-size: 13px; color: #10b981; font-weight: 700;">
+                        <i class="fa-solid fa-arrow-down"></i> Replace Lowest & Insert
+                    </div>
+                </div>
+
             </div>
         </div>
-        <div>
-             <h3 style="color: #0ea5e9;">混合计算组</h3>
-             <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 15px 0; width: 100%; text-align: center; border: 1px solid #e2e8f0; font-size: 20px;">
-                $$\mathcal{G}_{\text{calc}} = \mathcal{G}_{\text{online}} \cup \mathcal{G}_{\text{buffer}}$$
-             </div>
-             <p>当在线探索 ($\mathcal{G}_{\text{online}}$) 全军覆没时，STDB 提供的锚点能够维持梯度更新，确保模型持续学习，避免“零梯度”陷阱。</p>
+
+        <div class="tile" style="padding: 25px; display: flex; flex-direction: column; flex: 1;">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <div class="icon" style="background: rgba(14, 165, 233, 0.1); color: #0ea5e9; margin-right: 15px; margin-bottom: 0; width: 50px; height: 50px; font-size: 24px;">
+                    <i class="fa-solid fa-anchor"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0; color: #0f172a; font-size: 22px;">应用：Anchor Matching</h3>
+                    <div style="font-size: 14px; color: #64748b;">Solving Sparse Rewards</div>
+                </div>
+            </div>
+
+            <div style="background: #f0f9ff; padding: 20px; border-radius: 12px; border: 1px solid #bae6fd; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                
+                <div style="text-align: center; margin-bottom: 15px; font-size: 14px; color: #0369a1; font-weight: 600;">
+                    Matching Logic (Thought-Action Pair)
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <div style="background: white; color: #ef4444; padding: 8px 10px; border-radius: 8px; font-weight: 700; font-size: 13px; border: 1px solid #fecaca; box-shadow: 0 2px 4px rgba(239,68,68,0.1);">Failed $a_t$</div>
+                    <div style="flex: 1; height: 2px; background: #cbd5e1; position: relative;">
+                        <div style="position: absolute; top: -9px; left: 50%; transform: translateX(-50%); font-size: 10px; color: #64748b; background: #f0f9ff; padding: 0 4px;">COMPARE</div>
+                    </div>
+                    <div style="background: white; color: #15803d; padding: 8px 10px; border-radius: 8px; font-weight: 700; font-size: 13px; border: 1px solid #bbf7d0; box-shadow: 0 2px 4px rgba(22,163,74,0.1);">Anchor $a^*$</div>
+                </div>
+
+                <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e0f2fe; margin-bottom: 15px;">
+                    <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #475569;">
+                        <li style="margin-bottom: 6px;">
+                            <strong>Action:</strong> 必须完全一致 ($a_t == a^*$)
+                        </li>
+                        <li>
+                            <strong>Thought:</strong> 语义相似度 > $\epsilon$ ($\text{e.g. }\cos \theta > 0.9$)
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center;">
+                    <span style="background: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 700;">
+                        <i class="fa-solid fa-gift" style="margin-right: 5px;"></i>Grant Partial Reward
+                    </span>
+                </div>
+
+            </div>
+            
+            <div style="margin-top: 15px; font-size: 13px; color: #64748b; text-align: center; font-style: italic;">
+                "Even if the mission fails, correct local decisions are rewarded."
+            </div>
+
         </div>
     </div>
 </div>

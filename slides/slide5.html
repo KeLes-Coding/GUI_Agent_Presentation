@@ -7,7 +7,7 @@
             
             <div class="tile" style="padding: 25px; display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h3 style="margin: 0; font-size: 22px;">Level 1: WPSR (综合能力)</h3>
+                    <h3 style="margin: 0; font-size: 22px;">Level 1: WPSR (加权路径成功率)</h3>
                     <span style="background: #e0f2fe; color: #0284c7; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;">Weighted Success</span>
                 </div>
                 
@@ -33,7 +33,7 @@
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; height: 100%;">
                     <div style="background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 15px; display: flex; flex-direction: column;">
-                        <strong style="color: #0ea5e9; font-size: 16px;">MATCR</strong>
+                        <strong style="color: #0ea5e9; font-size: 16px;">MATCR(平均原子任务完成率)</strong>
                         <span style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">Foundational Reliability</span>
                         <div style="font-size: 15px; color: #334155; margin-bottom: 8px; line-height: 1.4;">
                             量化<strong>平均执行长度</strong>：通过计算连续成功占比 ($k_j/n_j$)，评估基础可靠性。
@@ -44,7 +44,7 @@
                     </div>
 
                     <div style="background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 15px; display: flex; flex-direction: column;">
-                        <strong style="color: #0ea5e9; font-size: 16px;">p-ATSR</strong>
+                        <strong style="color: #0ea5e9; font-size: 16px;">p-ATSR(位置加权成功率)</strong>
                         <span style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">Long-term Coherence</span>
                         <div style="font-size: 15px; color: #334155; margin-bottom: 8px; line-height: 1.4;">
                             强调<strong>长时序连贯性</strong>：利用递增权重 $p(i)$ 奖励<strong>后期成功</strong>，评估长序执行能力。
