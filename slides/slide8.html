@@ -1,30 +1,54 @@
-
 <div class="slide-container" id="slide8">
-    <h2>3. Jarvis 设计：双通道感知模块</h2>
+    <h2>3. Jarvis 设计：双流感知与去噪机制</h2>
     <div class="two-column">
-        <div>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 30px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <i class="fa-solid fa-eye" style="color: #0ea5e9; font-size: 24px; margin-right: 15px;"></i>
-                        <strong style="font-size: 24px; color: #334155;">视觉流 (Visual Stream)</strong>
-                    </div>
-                    <p>利用 VLM (如 Qwen2.5-VL) 实时分析屏幕截图，理解图标语义与布局结构。</p>
-                </li>
-                <li style="margin-bottom: 30px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <i class="fa-solid fa-code" style="color: #0ea5e9; font-size: 24px; margin-right: 15px;"></i>
-                        <strong style="font-size: 24px; color: #334155;">结构流 (Structural Stream)</strong>
-                    </div>
-                    <p>解析 UI Automator XML，剔除视口外无效节点，降低上下文噪音。</p>
-                </li>
-                <li style="background: rgba(14, 165, 233, 0.1); padding: 20px; border-radius: 12px; border: 1px solid #0ea5e9;">
-                    <strong style="color: #0284c7;">创新点：UID 映射</strong>
-                    <p style="margin-top: 5px; font-size: 18px;">将复杂的 (x,y) 回归问题转化为基于唯一 ID (uid) 的分类问题，显著提升点击精度。</p>
-                </li>
-            </ul>
+        <div style="display: flex; flex-direction: column; gap: 25px;">
+            
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <i class="fa-solid fa-eye" style="color: #0ea5e9; font-size: 20px; margin-right: 10px;"></i>
+                    <strong style="font-size: 20px; color: #1e293b;">视觉语义流 (Visual Stream)</strong>
+                </div>
+                <p style="font-size: 16px; margin: 0; color: #475569; line-height: 1.5;">
+                    利用 VLM (Qwen2.5-VL) 的强多模态能力，通过 <strong>截图 (Screenshot)</strong> 理解非结构化信息（如图标含义、图片内容、布局逻辑），弥补 XML 的语义缺失。
+                </p>
+            </div>
+
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <i class="fa-solid fa-code" style="color: #0ea5e9; font-size: 20px; margin-right: 10px;"></i>
+                    <strong style="font-size: 20px; color: #1e293b;">视口结构流 (Viewport-Aware Stream)</strong>
+                </div>
+                <p style="font-size: 16px; margin: 0; color: #475569; line-height: 1.5;">
+                    解析 UI Automator XML，但不仅仅是解析：
+                </p>
+                <ul style="font-size: 15px; color: #64748b; margin: 5px 0 0 0; padding-left: 25px;">
+                    <li><strong>视口过滤:</strong> 剔除 <code>bounds</code> 在屏幕可视区域外的无效节点，消除模型幻觉。</li>
+                    <li><strong>信息压缩:</strong> 截断过长文本，仅保留 <code>clickable</code> 等关键属性，降低 Token 负载。</li>
+                </ul>
+            </div>
+
+            <div style="background: linear-gradient(to right, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0.02)); padding: 15px; border-radius: 10px; border-left: 4px solid #0ea5e9;">
+                <strong style="color: #0284c7; font-size: 18px;">核心创新：Set-of-Mark UID 映射</strong>
+                <p style="margin-top: 5px; font-size: 16px; color: #334155;">
+                    将不稳定的连续坐标回归问题 $(x, y)$，转化为离散的 <strong>UID 分类问题</strong>。
+                    <br><span style="font-size: 14px; color: #64748b;">(Click accuracy: 坐标回归 &lt; 60% vs. UID分类 &gt; 95%)</span>
+                </p>
+            </div>
+
         </div>
-        <div class="image-wrapper contain">
-            <img src="assets\jarvis-architecture.png" alt="Smartphone screen analysis with bounding boxes">
+        
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; padding: 10px;">
+            <img src="assets/jarvis-architecture.png" 
+                 alt="Dual stream perception architecture" 
+                 style="
+                    max-width: 100%; 
+                    max-height: 500px; /* 限制最大高度防止撑开 slide */
+                    width: auto; 
+                    height: auto; 
+                    object-fit: contain; 
+                    border-radius: 16px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                 ">
         </div>
     </div>
+</div>
