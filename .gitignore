@@ -1,3 +1,5 @@
 Presentation/
 .vscode/
 assets/
+build/
+dist/
