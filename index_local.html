@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>硕士开题报告 - GUI智能体 - 郑梓瀚</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 1. 引用本地字体样式表 -->
+    <!-- 即使断网，字体也能正常显示 -->
+    <link rel="stylesheet" href="css/fonts.css">
+    
+    <!-- 2. FontAwesome (建议也下载到 css/all.min.css，如果没下载，暂时保留上面的CDN链接) -->
+    <!-- 如果已下载： -->
+    <!-- <link rel="stylesheet" href="css/all.min.css"> -->
+    <!-- 如果未下载，使用国内镜像： -->
     <link rel="stylesheet" href="assets/vendor/fontawesome/all.min.css">
+    
     <link rel="stylesheet" href="css/style.css">
 
     <script>
@@ -19,6 +26,9 @@
       svg: { fontCache: 'global' }
     };
     </script>
+    
+    <!-- 3. MathJax -->
+    <!-- MathJax 文件较多，本地化较麻烦。如果现场有网，建议用下面的国内镜像 -->
     <script type="text/javascript" id="MathJax-script" async
       src="assets/vendor/mathjax/tex-svg.js">
     </script>
