@@ -10,7 +10,7 @@
                 </div>
                 <h3 style="font-size: 22px; margin-bottom: 12px;">基准评估的局限性</h3>
                 <p style="font-size: 16px; color: #475569; line-height: 1.5; text-align: justify;">
-                    现有基准多依赖静态环境与最终状态判定，缺乏对中间过程的细粒度验证，导致“结果正确但过程错误”的假阳性。此外，仿真与真实环境存在巨大鸿沟（如 SOTA 模型在真实 OS 上的性能落差），难以精准衡量动态环境下的执行鲁棒性。
+                    现有基准多依赖<strong>静态环境</strong>与<strong>最终状态</strong>判定，缺乏对中间过程的<strong>细粒度验证</strong>，导致“结果正确但过程错误”的假阳性。此外，仿真与真实环境存在巨大鸿沟（如 SOTA 模型在真实 OS 上的性能落差），难以精准衡量动态环境下的执行鲁棒性。
                 </p>
             </div>
             <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
@@ -29,10 +29,9 @@
                 <div class="icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
                     <i class="fa-solid fa-sitemap"></i>
                 </div>
-                <h3 style="font-size: 22px; margin-bottom: 12px;">架构的规划-执行鸿沟</h3>
+                <h3 style="font-size: 22px; margin-bottom: 12px;">规划与执行的结构性断层</h3>
                 <p style="font-size: 16px; color: #475569; line-height: 1.5; text-align: justify;">
-                    通用架构难以兼顾规划与落地。混合架构（如 UFO）依赖的底层结构化数据（XML/UIA）常含噪声与缺失；而纯视觉架构（如 Mobile-Agent）在像素级定位上存在精度短板。高层语义指令难以精准转化为底层 (x,y) 操作，频发幻觉。
-                </p>
+                    现有架构在<strong>规划</strong>与<strong>落地</strong>之间存在<strong>结构性断层</strong>。混合架构（如 UFO）依赖的结构化数据（XML/UIA）常伴随噪声与缺失，而纯视觉架构（如 Mobile-Agent）在像素级定位上精度不足。这导致<strong>高层语义指令难以精准映射为底层 (x,y) 操作</strong>，从而引发执行幻觉。
             </div>
             <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
                 <span style="font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Examples</span>
@@ -51,7 +50,7 @@
                 </div>
                 <h3 style="font-size: 22px; margin-bottom: 12px;">RL 优化的稀疏奖励</h3>
                 <p style="font-size: 16px; color: #475569; line-height: 1.5; text-align: justify;">
-                    长链路交互面临极端的奖励稀疏性。传统算法（如 GRPO）常因“全负样本组”陷入“零梯度”陷阱，导致探索停滞。且缺乏有效的经验回放与过程监督机制（如 PPR 的复杂性），使得在线探索成本高昂、样本效率极低。
+                    长链路交互面临极端的<strong>奖励稀疏性</strong>。传统算法（如 GRPO）常因<strong><u>全负样本组</strong></u>陷入<strong><u>零梯度</strong></u>陷阱，导致探索停滞。且缺乏有效的<strong>经验回放</strong>与<strong>过程监督</strong>机制，使得在线探索成本高昂、样本效率极低。
                 </p>
             </div>
             <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">

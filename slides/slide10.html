@@ -1,6 +1,6 @@
 <div class="slide-container" id="slide10">
-    <h2 style="margin-bottom: 5px; color: #1e293b;">核心算法：CCAPO 概览</h2>
-    <p class="subtitle" style="margin-bottom: 20px; margin-top: 0; color: #64748b; font-size: 0.9em;">Counterfactual & Causal Advantage Policy Optimization</p>
+    <h2 style="margin-bottom: 5px; color: #1e293b;">核心算法：因果感知策略优化(CAPO) 概览</h2>
+    <p class="subtitle" style="margin-bottom: 20px; margin-top: 0; color: #64748b; font-size: 0.9em;">Causal-Aware Policy Optimization</p>
     
     <div class="content-area" style="display: flex; flex-direction: column; gap: 15px; justify-content: flex-start; height: 100%;">
         
@@ -8,7 +8,7 @@
             <div style="font-size: 14px; color: #334155; font-family: 'Latin Modern Math', serif; line-height: 1.3; overflow: hidden;">
                 $$
                 \begin{aligned}
-                L_{\text{CCAPO}}(\theta) &= \alpha_{\text{online}} \cdot \mathbb{E}_{\tau_i \in \mathcal{G}_{\text{online}}} \left[ \frac{1}{T_i} \sum_{t=0}^{T_i} \min \Big( r_t^{\text{online}} A_{\text{final}}^i, \ \text{clip}(r_t^{\text{online}}, 1\pm\epsilon) A_{\text{final}}^i \Big) \right] \\
+                L_{\text{CAPO}}(\theta) &= \alpha_{\text{online}} \cdot \mathbb{E}_{\tau_i \in \mathcal{G}_{\text{online}}} \left[ \frac{1}{T_i} \sum_{t=0}^{T_i} \min \Big( r_t^{\text{online}} A_{\text{final}}^i, \ \text{clip}(r_t^{\text{online}}, 1\pm\epsilon) A_{\text{final}}^i \Big) \right] \\
                 &\quad + \alpha_{\text{buffer}} \cdot \mathbb{E}_{\tau_j \in \mathcal{G}_{\text{buffer}}} \left[ \frac{1}{T_j} \sum_{t=0}^{T_j} \min \Big( r_t^{\text{buffer}} A_{\text{final}}^j, \ \text{clip}(r_t^{\text{buffer}}, 1\pm\epsilon) A_{\text{final}}^j \Big) \right]
                 \end{aligned}
                 $$
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="tiled-content" style="display: flex; gap: 15px; align-items: stretch; flex: 1;">
+        <div class="tiled-content" style="display: flex; gap: 15px; align-items: stretch; margin-top: auto; margin-bottom: 40px;">
             
             <div class="tile" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
                 <div class="icon" style="background: rgba(14, 165, 233, 0.1); color: #0ea5e9; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 10px;">
